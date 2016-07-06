@@ -5,7 +5,7 @@
 
 const Promise = require('bluebird')
 const path = require('path')
-const fs = require('fs');
+const fs = require('fs')
 const mkdirp = Promise.promisify(require('mkdirp'))
 const logger = require('log4js').getLogger('init-command')
 
@@ -35,7 +35,7 @@ function run(runtime) {
 			logger.info('initiating plugin')
 			const template = require('./template.json')
 
-			template.name = path.basename(targetDir)
+			template.name = runtime.config.pluginName
 
 			fs.writeFile(path.join(targetDir, 'package.json'), JSON.stringify(template, null, 2), null, function () {
 				logger.info(`plugin ${runtime.config.pluginName} initiated`)
