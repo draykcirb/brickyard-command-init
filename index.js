@@ -20,7 +20,7 @@ module.exports = {
  * @param {function(Object)} optionsCallback
  */
 function register(cmd, optionsCallback) {
-	cmd
+	return cmd
 		.description('init a plugin placing inside pluginStore')
 		.arguments('<plugin>')
 		.action(function (plugin) {
