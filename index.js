@@ -10,8 +10,8 @@ const mkdirp = Promise.promisify(require('mkdirp'))
 const logger = require('log4js').getLogger('init-command')
 
 module.exports = {
-	register,
-	run
+    register,
+    run
 }
 
 /**
@@ -20,25 +20,25 @@ module.exports = {
  * @param {function(Object)} optionsCallback
  */
 function register(cmd, optionsCallback) {
-	return cmd
-		.description('init a plugin placing inside pluginStore')
-		.arguments('<plugin>')
-		.action(function (plugin) {
-			optionsCallback({ pluginName: plugin })
-		})
+    return cmd
+        .description('init a plugin placing inside pluginStore')
+        .arguments('<plugin>')
+        .action(function (plugin) {
+            optionsCallback({ pluginName: plugin })
+        })
 }
 
 function run(runtime) {
-	const targetDir = path.join(process.cwd(), runtime.config.pluginStore, runtime.config.pluginName)
-	mkdirp(targetDir)
-		.then(function () {
-			logger.info('initiating plugin')
-			const template = require('./template.json')
+    const targetDir = path.join(process.cwd(), runtime.config.pluginStore, runtime.config.pluginName)
+    mkdirp(targetDir)
+        .then(function () {
+            logger.info('initiating plugin')
+            const template = require('./template.json')
 
-			template.name = runtime.config.pluginName
+            template.name = runtime.config.pluginName
 
-			fs.writeFile(path.join(targetDir, 'package.json'), JSON.stringify(template, null, 2), null, function () {
-				logger.info(`plugin ${runtime.config.pluginName} initiated`)
-			})
-		})
+            fs.writeFile(path.join(targetDir, 'package.json'), JSON.stringify(template, null, 2), null, function () {
+                logger.info(`plugin ${runtime.config.pluginName} initiated`)
+            })
+        })
 }
