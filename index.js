@@ -11,7 +11,10 @@ const logger = require('log4js').getLogger('init-command')
 
 module.exports = {
     register,
-    run
+    run,
+    config: {
+        allowNoPrograms: true
+    }
 }
 
 /**
